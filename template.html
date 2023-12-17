@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title><!--TITLE--></title>
+<style>
+*, ::before, ::after {
+  box-sizing: inherit;
+}
+body {
+  margin:0;
+  background:#2d3134;
+  font-weight: 400;
+  line-height: 1.66;
+  font-family: "Open Sans",sans-serif;
+}
+p {
+  margin: 0 0 1.5em;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: #71a7d3;
+}
+a:hover {
+  color: #cc838d;
+}
+#page {
+  font-size:15px;
+  word-wrap:break-word;
+  padding:20px 40px 35px;
+  border:1px solid #32393f;
+  border-width: 0 1px;
+}
+#chap_info {
+  word-wrap:break-word;
+  border:1px solid #32393f;
+  border-width: 0 1px;
+}
+#index img {
+  width: 180px;
+  height: 259px;
+  box-shadow: 0 0 16px 2px rgba(0,0,0,.24);
+}
+.container {
+  background:#20282e;
+  color:#bfc4c9;
+  margin:0 auto;
+  height:100%;
+  width:888px;
+}
+.wi_authornotes {
+  padding: 15px 35px;
+  background-color: #2d3134 !important;
+  border-radius: 5px;
+  position: relative;
+}
+.wi_authornotes::before {
+  font-family: Arial;
+  content: "\201C";
+  font-size: 4em;
+  color: #e5e5e6 !important;
+  position: absolute;
+  left: 10px;
+  top: -10px;
+}
+.wi_authornotes::after {
+  font-family: Arial;
+  content: "\201D";
+  font-size: 4em;
+  color: #e5e5e6 !important;
+  position: absolute;
+  bottom: -45px;
+  right: 10px;
+}
+.p-avatar-wrap {
+  float: left;
+}
+.p-avatar-wrap img {
+  border-radius: 50%;
+  width: 45px !important;
+  height: 45px !important;
+  object-fit: cover;
+}
+.an_username {
+  padding-left: 10px;
+}
+.an_username a {
+  font-weight: 600;
+  color: #e5e5e6;
+}
+.an_username a:hover {
+  color: #cc838d;
+}
+.wi_authornotes_body {
+  padding-top: 10px;
+}
+.nav_chp_fi {
+  height: 43px;
+  border: 1px solid #ececec;
+  border-color: #32393f !important;
+  background-color: #2c3134 !important;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.btn-wi.btn-prev {
+  position: relative;
+  float: left;
+  padding: 3px 10px;
+  padding-left: 35px;
+  background-color: #152129 !important;
+  color: #bfc4c9 !important;
+}
+.btn-wi.btn-next {
+  position: relative;
+  float: right;
+  padding: 3px 10px;
+  padding-right: 35px;
+  background-color: #152129 !important;
+  color: #bfc4c9 !important;
+}
+.btn-wi {
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  user-select: none;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.btn-wi.btn-prev::before {
+  content: "\00ab";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 25px;
+  padding: 2px 0 4px;
+  text-align: center;
+  border-radius: 4px 0 0 4px;
+  background: rgba(0,0,0,.15);
+}
+.btn-wi.btn-next::after {
+  content: "\00bb";
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 25px;
+  padding: 2px 0 4px;
+  text-align: center;
+  border-radius: 0 4px 4px 0;
+  background: rgba(0,0,0,.15);
+}
+.btn-wi.disabled {
+  opacity: .65;
+  cursor: not-allowed;
+}
+.sp-wrap {
+  padding: 0px;
+  border-style: solid;
+  border-image: none;
+  border-width: 1px 1px 1px 2px;
+  clear: both;
+}
+.sp-wrap-default {
+  background: none repeat scroll 0 0 #262626 !important;
+  border-color: #4b5156 !important;
+  margin-bottom: 20px;
+}
+.sp-head {
+  color: #e8e8e8 !important;
+  font-weight: 400 !important;
+  font-size: 14px;
+  background: url("data:image/gif;base64,R0lGODlhCQAJAMQfAIqZyoGSxv3+/trl84CQxYCRxn6PxMXQ7efq9H+Pwtnk8oKTxoCQxKy44QAAANvl9rvG6fD5/o2by4GRxvb8//v9//7+/ubw+v39/ouayoKSxoOTx/7+/wwMDP///////yH5BAEAAB8ALAAAAAAJAAkAAAU84AdoGkNmX4Z4HldRirSxXMdF1zK7nXU9mk2t4+h0BIlNhWPpYTCBDQXXwRwggczgJ8BAGhLRZGIoEFAhADs=") no-repeat left center;
+  cursor: pointer;
+  display: block;
+  margin-left: 6px;
+  padding: 4px 14px 3px;
+  text-align: left;
+}
+.sp-body {
+  background: #363839 !important;
+  border-color: #32393f !important;
+  border-top: 1px solid #003964;
+  padding: 2px 6px;
+  height: auto;
+}
+.sp-body.folded {
+  display: none;
+}
+.spdiv {
+  color: #444;
+  width: 98%;
+  margin: 0px auto;
+  text-align: right;
+  font-size: 0.8em;
+  cursor: pointer;
+  display: block;
+}
+.wi_news {
+  border: 1px solid #085892;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-bottom: 1.5em;
+}
+.wi_news_title {
+  position: relative;
+  padding: 5px 15px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #065992;
+}
+.wi_news_body {
+  background-color: #002a47 !important;
+  padding: 5px 15px;
+}
+.fa-exclamation-triangle::before {
+  content: "⚠";
+}
+a.toc_lnk {
+  color:#bfc4c9;
+}
+a.toc_lnk:hover {
+  color: #cc838d;
+  cursor: pointer;
+}
+.chapter_title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  font-family: 'Open Sans',serif;
+  line-height: 30px;
+  padding-bottom: 10px;
+}
+.chp_byauthor {
+  text-align: center;
+  margin-top: -5px;
+  padding-bottom: 10px;
+}
+.fic_title {
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-top: 10px;
+  color: #e8e8e8 !important;
+}
+.novel_cover {
+  width: 180px;
+  height: 259px;
+
+}
+.index-container {
+  padding: 1em 1em 0;
+  display: flex;
+  flex-direction: row;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1em;
+}
+.genre {
+  border: 1px solid #304f6c !important;
+  color: #fff !important;
+  background: #375878;
+  font-size: 13px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 5px 5px 0;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+.tag {
+  font-size: 13px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 5px 5px 0;
+  padding: 2px 7px;
+  border: 1px solid #085792;
+  border-radius: 3px;
+  background-color: #1e2328 !important;
+  border-color: #32393f !important;
+  color: #bfc4c9 !important;
+}
+.toc {
+  list-style: none;
+  padding: 0;
+  margin: 1em;
+  margin-top: 0;
+  display:flex;
+}
+.toc > li {
+  padding-left: 1em;
+}
+.toc li:nth-child(2n+1) {
+  background-color: #1e2328;
+}
+#sort {
+  padding: 3px 12px;
+  border: 1px solid #32393f;
+  color: #e8e8e8;
+  font-size: 14px;
+}
+#sort:hover {
+  color: #cc838d;
+  cursor: pointer;
+}
+.sort-container {
+  text-align: right;
+  margin-right: 1.75em;
+  margin-bottom: .5em;
+}
+@media (max-width: 1200px) {
+  #page, #index {
+    font-size: 2em;
+  }
+  .chapter_title {
+    font-size: 4em;
+    padding-bottom: 1em;
+    padding-top: .5em;
+  }
+  .container {
+    width: 100%;
+  }
+  .p-avatar-wrap img {
+    width: 3em !important;
+    height: 3em !important;
+  }
+  .wi_authornotes {
+    padding: 2em 2.3em;
+  }
+  .btn-wi {
+    font-size: 2em;
+    border-radius: .4em;
+  }
+  .nav_chp_fi {
+    height: 6em;
+  }
+  .btn-wi.btn-prev {
+    padding: .3em .8em;
+    padding-left: 2.2em;
+  }
+  .btn-wi.btn-prev::before {
+    content: "\00ab ";
+    width: 2em;
+    padding: 4px 0 4px;
+  }
+  .btn-wi.btn-next {
+    padding: .3em .7em;
+    padding-right: 2.2em;
+  }
+  .btn-wi.btn-next::after {
+    content: "\00bb ";
+    width: 2em;
+    padding: 4px 0 4px;
+  }
+  .wi_authornotes::after {
+    bottom: -.7em;
+  }
+  .fic_title {
+    font-size: 2em;
+  }
+  .genre, .tag {
+    font-size: 1em;
+    border-radius: .2em;
+    margin: 0 .5em .5em 0;
+    padding: .1em .4em;
+  }
+  #sort {
+    font-size: 2em;
+  }
+  li > a {
+    font-size: 1.2em;
+    margin: .5em;
+  }
+  .index-container:first-of-type {
+    flex-direction: column;
+    align-items: center;
+  }
+  .flex-column {
+    align-items: center;
+  }
+  .novel_cover {
+    width: 11em;
+    height: 15em;
+  }
+  #index img {
+    width: 11em;
+    height: 15em;
+  }
+  .p-avatar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .p-avatar-wrap span {
+    font-size: 1.2em;
+  }
+  #index .p-avatar-wrap img {
+    width: 3.5em !important;
+    height: 3.5em !important;
+  }
+}
+</style>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+</head>
+<body>
+<div id=index class=container style=background:#262c33>
+<div class=index-container>
+<div class="novel_cover flex-column">
+<!--COVER-->
+</div>
+<div class=flex-column>
+<div class=fic_title><!--TITLE--></div>
+<div class=p-avatar-wrap>
+<!--AUTH_ICON-->
+<span style=position:relative;top:-35%>
+<!--AUTH_LINK-->
+</span>
+</div>
+<!--SYNOPSIS-->
+</div>
+</div>
+<div class=index-container style="margin:0 1em;flex-wrap:wrap">
+<!--GENRES-->
+<br/>
+<!--TAGS-->
+</div>
+<div style=padding:.25em></div>
+<div id=toc>
+<div class=sort-container>
+<a id=sort onclick="sort()" title="Sort Descending">⮟</a>
+</div>
+<ul class=toc id=toc-list style="flex-direction:column">
+<!--TOC-->
+</ul>
+</div>
+<div style=padding:.25em></div>
+</div>
+<div id=page_container class=container>
+<div id=chap_info>
+<div style="padding: 15px 10px 1px;font-size: 14px">
+<a class=toc_lnk onclick="parent.location.hash=''"><!--TITLE--></a>
+<span id=chap_title> &gt; CHAPTER TITLE</span>
+<div class=chapter_title>CHAPTER TITLE</div>
+<div class=chp_byauthor>
+<a href="#"><!--TITLE--></a>
+by
+<!--AUTH_LINK-->
+</div>
+</div>
+</div>
+<div class=nav_chp_fi>
+<a class="btn-wi btn-prev" onclick="chapterLoad(Reader.chapter - 1)">Previous</a>
+<a class="btn-wi btn-next" onclick="chapterLoad(Reader.chapter + 1)">Next</a>
+</div>
+<div id=page>
+</div>
+<div class=nav_chp_fi>
+<a class="btn-wi btn-prev" onclick="chapterLoad(Reader.chapter - 1)">Previous</a>
+<a class="btn-wi btn-next" onclick="chapterLoad(Reader.chapter + 1)">Next</a>
+</div>
+</div>
+<!--CONTENTS-->
+<script>
+const Reader = {
+  chapter:1,
+  chapters:document.querySelectorAll('chapter').length,
+  toc:document.getElementById('contents'),
+  page:document.getElementById('page'),
+  btn_prev:document.querySelectorAll('.btn-prev'),
+  btn_next:document.querySelectorAll('.btn-next'),
+  chp_title:document.getElementById('chap_title'),
+  container:document.getElementById('page_container'),
+  index:document.getElementById('index'),
+  toc_list:document.getElementById('toc-list'),
+  sort:document.getElementById('sort')
+};
+function hashChange(e) {
+  if (parent.location.hash) {
+    Reader.chapter = Number(parent.location.hash.substr(1));
+    hideIndex();
+    chapterLoad();
+  } else {
+    showIndex();
+  }
+  scrollTo(0, 0);
+}
+addEventListener('hashchange', hashChange);
+function sort() {
+  Reader.toc_list.style.flexDirection = ((Reader.toc_list.style.flexDirection == "column")? "column-reverse" : "column"); 
+  Reader.sort.innerText = ((Reader.sort.innerText == "⮝")? "⮟" : "⮝");
+  Reader.sort.setAttribute('title', ((Reader.sort.getAttribute('title') == "Sort Descending")? "Sort Ascending" : "Sort Descending"));
+}
+function showIndex() {
+  Reader.container.style.display = 'none';
+  Reader.index.style.display = 'block';
+}
+function hideIndex() {
+  Reader.container.style.display = 'block';
+  Reader.index.style.display = 'none';
+}
+function chapterLoad(pg){
+  const prev = Reader.chapter;
+  if (pg != undefined) {Reader.chapter = pg}
+  if (Reader.chapter > Reader.chapters || Reader.chapter < 1) {
+    if (pg != undefined) {
+      Reader.chapter = prev;
+    }
+  }
+  let page = Reader.toc.querySelector(`chapter[page="${Reader.chapter}"]`);
+  parent.location.hash = Reader.chapter;
+  if (page) {
+    if (page.hasAttribute('hasprev')) {
+      Reader.btn_prev.forEach(x => {x.classList.remove('disabled');});
+    } else {
+      Reader.btn_prev.forEach(x => {x.classList.add('disabled')});
+    }
+    if (page.hasAttribute('hasnext')) {
+      Reader.btn_next.forEach(x => {x.classList.remove('disabled')});
+    } else {
+      Reader.btn_next.forEach(x => {x.classList.add('disabled')});
+    }
+    Reader.chp_title.innerText = ` > ${page.getAttribute('title')}`
+    document.title = `<!--TITLE--> - ${page.getAttribute('title')}`
+    document.querySelector('.chapter_title').innerText = page.getAttribute('title');
+    Reader.page.innerHTML = page.innerHTML;
+    Reader.page.querySelectorAll('div.sp-wrap').forEach(x => {
+      const head = x.children[0];
+      const body = x.children[1];
+      body.children[1].addEventListener('click', function() {
+        head.click();
+      });
+      head.addEventListener('click', function(){
+        if (body.style.display == "block") {
+          body.style.display = "none";
+          head.setAttribute("title", "Expand");
+        } else {
+          body.style.display = "block";
+          head.setAttribute("title", "Collapse");
+        }
+      });
+    })
+  } else {
+    console.error(`No such chapter ${Reader.chapter}`);
+  }
+}
+hashChange();
+</script>
+</body>
+</html>
