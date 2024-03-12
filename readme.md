@@ -15,6 +15,7 @@ This program does work some of the time but scribblehub provides a lot of protec
 
 * Python 3
 * Selenium python package (`python -m pip install selenium`)
+* Pypub3 python package (`python -m pip intstall pypub3`)
 
 ### Usage:
 
@@ -24,8 +25,12 @@ As many links as are desired may be entered into any session.
 They should be the links as provided in your reading list.
 (i.e. in the form `https://scribblehub.com/series/<id>/<name>/`)
 
+Replace template.html with epub for epub export:
+
+`python alexandria.py epub <links to stories>`
+
 ### To-Do
 
 * Clean up existing template and provide more adaptive display
 * Provide a temporary story buffer to quickly iterate on custom templates
-* Provide support for exporting to epub (or other formats)
+* Provide support for exporting to other formats
