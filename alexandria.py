@@ -110,6 +110,9 @@ def interceptor(request):
     request.headers['TE'] = 'trailers'
     del request.headers['X-Amzn-Trace-Id']
 
+
+driver.request_interceptor = interceptor
+
 driver.implicitly_wait(5)
 
 
@@ -130,13 +133,14 @@ def nav_toc():
 DATA_CATEGORIES = ['title', 'author', 'auth_url', 'auth_avi', 'cover', 'desc', 'genre', 'tags']
 META_COUNT = 8
 
-for request in driver.requests:
-    if request.response:
-        print(
-            request.url,
-            request.response.status_code,
-            request.response.headers['Content-Type']
-        )
+def printHead():
+    for request in driver.requests:
+        if request.response:
+            print(
+                request.url,
+                request.response.status_code,
+                request.response.headers['Content-Type']
+            )
 
 def build_toc(buffer, count, chaps):
     nav_toc()
