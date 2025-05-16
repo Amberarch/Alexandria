@@ -15,7 +15,9 @@ This program does work some of the time but scribblehub provides a lot of protec
 
 * Python 3
 * Selenium python package (`python -m pip install selenium`)
+* SeleniumWire python package (`python -m pip install seleniumwire`)
 * Pypub3 python package (`python -m pip intstall pypub3`)
+* Blinker python package (`python -m pip install blinker==1.7.0`)
 
 ### Usage:
 

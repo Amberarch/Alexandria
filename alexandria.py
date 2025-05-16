@@ -1,4 +1,5 @@
-from selenium import webdriver
+#!/usr/bin/python3
+from seleniumwire import webdriver
 from selenium.webdriver.common.by import By
 from urllib.request import urlopen
 import datetime
@@ -92,8 +93,27 @@ if template == "epub":
 else:
     writer = TemplateWriter(template)
 
+## Webdriver stuff
+
 driver = webdriver.Firefox()
+
+def interceptor(request):
+#    del request.headers['Referer']  # Remember to delete the header first
+#    request.headers['Referer'] = 'some_referer'  # Spoof the referer
+    del request.headers['Connection']
+    request.headers['Connection'] = 'keep-alive'
+    del request.headers['Sec-Fetch-Site']
+    request.headers['Sec-Fetch-Site'] = 'cross-site'
+    del request.headers['Upgrade-Insecure-Requests']
+    request.headers['Upgrade-Insecure-Requests'] = '1'
+    del request.headers['TE']
+    request.headers['TE'] = 'trailers'
+    del request.headers['X-Amzn-Trace-Id']
+
 driver.implicitly_wait(5)
+
+
+## end webdriver stuff
 
 def navigate(url):
     now = time.time()
@@ -109,6 +129,14 @@ def nav_toc():
 
 DATA_CATEGORIES = ['title', 'author', 'auth_url', 'auth_avi', 'cover', 'desc', 'genre', 'tags']
 META_COUNT = 8
+
+for request in driver.requests:
+    if request.response:
+        print(
+            request.url,
+            request.response.status_code,
+            request.response.headers['Content-Type']
+        )
 
 def build_toc(buffer, count, chaps):
     nav_toc()
